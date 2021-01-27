@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.pet.mapper.fostercare.FosterCareMapper">
+
+    <resultMap id="fostercare" type="com.manager.pet.model.vo.FosterCareVO">
+        <id property="id" column="id"/>
+        <result property="theHostName" column="thehost_name"/>
+        <result property="phone" column="thehost_phone_num"/>
+        <result property="petName" column="pet_name"/>
+        <result property="petAge" column="pet_age"/>
+        <result property="petVariety" column="pet_variety"/>
+        <result property="petWeight" column="pet_weight"/>
+        <result property="petColour" column="pet_colour"/>
+        <result property="petLike" column="pet_like"/>
+        <result property="petGender" column="pet_gender"/>
+        <result property="petHealth" column="pet_health"/>
+        <result property="petCharacter" column="pet_character"/>
+        <result property="petFosterCareTime" column="pet_fostercare_time"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <insert id="insertFosterCarePet" parameterType="com.manager.pet.model.dto.FosterCareDTO">
+        INSERT INTO fostercare
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fosterCare.theHostName != null and fosterCare.theHostName != ''">
+                thehost_name,
+            </if>
+            <if test="fosterCare.phone != null and fosterCare.phone != ''">
+                thehost_phone_num,
+            </if>
+            <if test="fosterCare.petName != null and fosterCare.petName != ''">
+                pet_name,
+            </if>
+            <if test="fosterCare.petAge != null">
+                pet_age,
+            </if>
+            <if test="fosterCare.petVariety != null and fosterCare.petVariety != ''">
+                pet_variety,
+            </if>
+            <if test="fosterCare.petWeight != null">
+                pet_weight,
+            </if>
+            <if test="fosterCare.petColour != null and fosterCare.petColour != ''">
+                pet_colour,
+            </if>
+            <if test="fosterCare.petLike != null and fosterCare.petLike != ''">
+                pet_like,
+            </if>
+            <if test="fosterCare.petGender != null">
+                pet_gender,
+            </if>
+            <if test="fosterCare.petHealth != null">
+                pet_health,
+            </if>
+            <if test="fosterCare.petCharacter != null and fosterCare.petCharacter != ''">
+                pet_character,
+            </if>
+            <if test="fosterCare.petFosterCareTime != null and fosterCare.petFosterCareTime != ''">
+                pet_fostercare_time,
+            </if>
+            create_time,
+            update_time
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fosterCare.theHostName != null and fosterCare.theHostName != ''">
+                #{fosterCare.theHostName},
+            </if>
+            <if test="fosterCare.phone != null and fosterCare.phone != ''">
+                #{fosterCare.phone},
+            </if>
+            <if test="fosterCare.petName != null and fosterCare.petName != ''">
+                #{fosterCare.petName},
+            </if>
+            <if test="fosterCare.petAge != null">
+                #{fosterCare.petAge},
+            </if>
+            <if test="fosterCare.petVariety != null and fosterCare.petVariety != ''">
+                #{fosterCare.petVariety},
+            </if>
+            <if test="fosterCare.petWeight != null">
+                #{fosterCare.petWeight},
+            </if>
+            <if test="fosterCare.petColour != null and fosterCare.petColour != ''">
+                #{fosterCare.petColour},
+            </if>
+            <if test="fosterCare.petLike != null and fosterCare.petLike != ''">
+                #{fosterCare.petLike},
+            </if>
+            <if test="fosterCare.petGender != null">
+                #{fosterCare.petGender},
+            </if>
+            <if test="fosterCare.petHealth != null">
+                #{fosterCare.petHealth},
+            </if>
+            <if test="fosterCare.petCharacter != null and fosterCare.petCharacter != ''">
+                #{fosterCare.petCharacter},
+            </if>
+            <if test="fosterCare.petFosterCareTime != null and fosterCare.petFosterCareTime != ''">
+                #{fosterCare.petFosterCareTime},
+            </if>
+            #{fosterCare.createTime},
+            #{fosterCare.updateTime}
+        </trim>
+    </insert>
+
+    <update id="modifyFosterCarePet" parameterType="com.manager.pet.model.dto.FosterCareDTO">
+        UPDATE fostercare SET
+        <if test="fosterCare.theHostName != null and fosterCare.theHostName != ''">
+            thehost_name = #{fosterCare.theHostName},
+        </if>
+        <if test="fosterCare.phone != null and fosterCare.phone != ''">
+            thehost_phone_num = #{fosterCare.phone},
+        </if>
+        <if test="fosterCare.petName != null and fosterCare.petName != ''">
+            pet_name = #{fosterCare.petName},
+        </if>
+        <if test="fosterCare.petAge != null">
+            pet_age = #{fosterCare.petAge},
+        </if>
+        <if test="fosterCare.petVariety != null and fosterCare.petVariety != ''">
+            pet_variety = #{fosterCare.petVariety},
+        </if>
+        <if test="fosterCare.petWeight != null">
+            pet_weight = #{fosterCare.petWeight},
+        </if>
+        <if test="fosterCare.petColour != null and fosterCare.petColour != ''">
+            pet_colour = #{fosterCare.petColour},
+        </if>
+        <if test="fosterCare.petLike != null and fosterCare.petLike != ''">
+            pet_like = #{fosterCare.petLike},
+        </if>
+        <if test="fosterCare.petGender != null">
+            pet_gender = #{fosterCare.petGender},
+        </if>
+        <if test="fosterCare.petHealth != null">
+            pet_health = #{fosterCare.petHealth},
+        </if>
+        <if test="fosterCare.petCharacter != null and fosterCare.petCharacter != ''">
+            pet_character = #{param1.petCharacter},
+        </if>
+        <if test="fosterCare.petFosterCareTime != null and fosterCare.petFosterCareTime != ''">
+            pet_fostercare_time = #{fosterCare.petFosterCareTime},
+        </if>
+        update_time = #{fosterCare.updateTime}
+        WHERE id = #{fosterCare.id}
+    </update>
+</mapper>

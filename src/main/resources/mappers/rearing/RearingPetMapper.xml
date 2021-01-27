@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.pet.mapper.rearing.RearingPetMapper">
+
+    <resultMap id="rearingPet" type="com.manager.pet.model.vo.RearingPetVO">
+        <id property="id" column="id"/>
+        <result property="petFather" column="pet_father"/>
+        <result property="petMother" column="pet_mother"/>
+        <result property="petName" column="pet_name"/>
+        <result property="petBirthday" column="pet_birthday"/>
+        <result property="petColour" column="pet_colour"/>
+        <result property="petWeight" column="pet_weight"/>
+        <result property="petSpouse" column="pet_spouse"/>
+        <result property="petCharacter" column="pet_character"/>
+        <result property="petGender" column="pet_gender"/>
+        <result property="petHealth" column="pet_health"/>
+        <result property="petPs" column="pet_ps"/>
+    </resultMap>
+
+    <insert id="insertRearingPet" parameterType="com.manager.pet.model.dto.RearingPetDTO">
+        INSERT INTO rearing
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rearing.petFather != null and rearing.petFather != ''">
+                pet_father,
+            </if>
+            <if test="rearing.petMother != null and rearing.petMother != ''">
+                pet_mother,
+            </if>
+            <if test="rearing.petName != null and rearing.petName != ''">
+                pet_name,
+            </if>
+            <if test="rearing.petBirthday != null and rearing.petBirthday != ''">
+                pet_birthday,
+            </if>
+            <if test="rearing.petColour != null and rearing.petColour != ''">
+                pet_colour,
+            </if>
+            <if test="rearing.petWeight != null">
+                pet_weight,
+            </if>
+            <if test="rearing.petSpouse != null and rearing.petSpouse != ''">
+                pet_spouse,
+            </if>
+            <if test="param1.petCharacter != null and param1.petCharacter != ''">
+                pet_character,
+            </if>
+            <if test="rearing.petGender != null">
+                pet_gender,
+            </if>
+            <if test="rearing.petHealth != null">
+                pet_health,
+            </if>
+            <if test="rearing.petPs != null and rearing.petPs != ''">
+                pet_ps,
+            </if>
+            create_time,
+            update_time
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rearing.petFather != null and rearing.petFather != ''">
+                #{rearing.petFather},
+            </if>
+            <if test="rearing.petMother != null and rearing.petMother != ''">
+                #{rearing.petMother},
+            </if>
+            <if test="rearing.petName != null and rearing.petName != ''">
+                #{rearing.petName},
+            </if>
+            <if test="rearing.petBirthday != null and rearing.petBirthday != ''">
+                #{rearing.petBirthday},
+            </if>
+            <if test="rearing.petColour != null and rearing.petColour != ''">
+                #{rearing.petColour},
+            </if>
+            <if test="rearing.petWeight != null">
+                #{rearing.petWeight},
+            </if>
+            <if test="rearing.petSpouse != null and rearing.petSpouse != ''">
+                #{rearing.petSpouse},
+            </if>
+            <if test="param1.petCharacter != null and param1.petCharacter != ''">
+                #{rearing.petCharacter},
+            </if>
+            <if test="rearing.petGender != null">
+                #{rearing.petGender},
+            </if>
+            <if test="rearing.petHealth != null">
+                #{rearing.petHealth},
+            </if>
+            <if test="rearing.petPs != null and rearing.petPs != ''">
+                #{rearing.petPs},
+            </if>
+            #{rearing.createTime},
+            #{rearing.updateTime}
+        </trim>
+    </insert>
+    
+    <update id="updateRearingPet" parameterType="com.manager.pet.model.dto.RearingPetDTO">
+        UPDATE rearing SET
+        <if test="pet.petFather != null and pet.petFather != ''">
+            pet_father = #{pet.petFather},
+        </if>
+        <if test="pet.petMother != null and pet.petMother != ''">
+            pet_mother = #{pet.petMother},
+        </if>
+        <if test="pet.petName != null and pet.petName != ''">
+            pet_name = #{pet.petName},
+        </if>
+        <if test="pet.petBirthday != null and pet.petBirthday != ''">
+            pet_birthday = #{pet.petBirthday},
+        </if>
+        <if test="pet.petColour != null and pet.petColour != ''">
+            pet_colour = #{pet.petColour},
+        </if>
+        <if test="pet.petWeight != null and pet.petWeight != ''">
+            pet_weight = #{pet.petWeight},
+        </if>
+        <if test="pet.petSpouse != null and pet.petSpouse != ''">
+            pet_spouse = #{pet.petSpouse},
+        </if>
+        <if test="pet.petCharacter != null and pet.petCharacter != ''">
+            pet_character = #{pet.petCharacter},
+        </if>
+        <if test="pet.petGender != null and pet.petGender != ''">
+            pet_gender = #{pet.petGender},
+        </if>
+        <if test="pet.petHealth != null">
+            pet_health = #{pet.petHealth},
+        </if>
+        <if test="pet.petPs != null and pet.petPs != ''">
+            pet_ps = #{pet.petPs},
+        </if>
+        update_time = #{pet.updateTime}
+        WHERE id = #{pet.id}
+    </update>
+</mapper>
