@@ -29,4 +29,7 @@ public interface RearingPetMapper {
 
     @Select("SELECT COUNT(1) FROM rearing WHERE is_delete = 2")
     Integer selectRearingPetCount();
+
+    @Update("UPDATE rearing SET pet_photo = #{photo} WHERE id = #{id}")
+    void uploadPetPhoto(@Param(value = "photo")String photo, @Param(value = "id")String id);
 }

@@ -2,6 +2,8 @@ package com.manager.pet.model.vo;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * i
  * 2020 \ 12 \ 16
@@ -24,4 +26,6 @@ public class RearingPetVO {
     private Integer kq;
     private String health;
     private String gender;
+    private String photo;
+    private List<String> photos;
 }

@@ -22,4 +22,6 @@ public interface RearingPetService {
     void delRearingPet(Integer id);
 
     Integer getRearingPetCount();
+
+    void uploadPetPhoto(String photo, String id);
 }

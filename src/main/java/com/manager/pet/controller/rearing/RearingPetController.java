@@ -75,14 +75,15 @@ public class RearingPetController {
 
     @PostMapping("/uploadRearingPhoto")
     @ResponseBody
-    public Result uploadRearingPhoto(MultipartFile file) {
+    public Result uploadRearingPhoto(MultipartFile file, @RequestParam(value = "id") String id) {
         try {
-            BASE64Encoder base64Encoder =new BASE64Encoder();
-            String base64EncoderImg = base64Encoder.encode(file.getBytes());
-            System.out.println(base64EncoderImg);
+            BASE64Encoder petPhoto =new BASE64Encoder();
+            String photo = petPhoto.encode(file.getBytes());
+            rearingPetService.uploadPetPhoto(photo, id);
+            return new Result(200);
         } catch (IOException e) {
             e.printStackTrace();
+            return new Result(0);
         }
-        return new Result(200);
     }
 }

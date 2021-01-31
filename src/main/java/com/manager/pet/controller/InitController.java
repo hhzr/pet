@@ -12,8 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @CrossOrigin
@@ -70,6 +69,9 @@ public class InitController {
     @GetMapping("/toModifyRearingPet")
     public String toModifyRearingPet(@RequestParam("id") Integer id, Model model) {
         RearingPetVO rearingPet = this.rearingPetService.getRearingPetById(id);
+        String photo = rearingPet.getPhoto();
+        String[] split = photo.split(",");
+        rearingPet.setPhotos(new ArrayList<>(Arrays.asList(split)));
         model.addAttribute("rearingPet", rearingPet);
         return "rearing/modifyrear";
     }

@@ -15,6 +15,7 @@
         <result property="petGender" column="pet_gender"/>
         <result property="petHealth" column="pet_health"/>
         <result property="petPs" column="pet_ps"/>
+        <result property="photo" column="pet_photo"/>
     </resultMap>
 
     <insert id="insertRearingPet" parameterType="com.manager.pet.model.dto.RearingPetDTO">

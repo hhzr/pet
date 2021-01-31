@@ -9,6 +9,13 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <link rel="stylesheet" href="style/admin.css" media="all">
+    <style>
+        .layui-upload-img {
+            width: 92px;
+            height: 110px;
+            margin: 0 10px 10px 0;
+        }
+    </style>
 </head>
 <body>
 <div id="LAY_app">
@@ -26,7 +33,22 @@
                     <div class="layui-card-body" style="padding: 15px;">
                         <form class="layui-form" action="/modifyRearingPet?id=${rearingPet.id}" content="json"
                               method="post" lay-filter="component-form-group">
+                            <div class="layui-upload">
+                                <label class="layui-form-label">宠物图片</label>
+                                <div class="layui-input-block">
+                                    <button type="button" class="layui-btn" id="test2">多图片上传</button>
+                                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                        预览图：
+                                        <div class="layui-upload-list" id="demo2">
+                                            <#list rearingPet.photos as photo>
+                                                <img src="data:image/jpeg;base64,${photo}" class="layui-upload-img">
+                                            </#list>
+                                        </div>
+                                    </blockquote>
+                                </div>
 
+                            </div>
+                            <input hidden value="${rearingPet.id}" id="id">
                             <div class="layui-form-item">
                                 <label class="layui-form-label">父亲</label>
                                 <div class="layui-input-block">
@@ -148,7 +170,7 @@
 
                             <div class="layui-form-item layui-layout-admin">
                                 <div class="layui-input-block">
-                                    <button class="layui-btn" lay-submit="" lay-filter="sub">
+                                    <button class="layui-btn" lay-submit="" lay-filter="sub" id="sub">
                                         保存
                                     </button>
                                 </div>
@@ -164,17 +186,24 @@
 <script src="layui/layui.all.js"></script>
 <script src="jquery.min.js"></script>
 <script>
+
+    var url = '';
+    $.getJSON("json/package.json", function (data) {
+        url = data.ipaddr
+    })
+
     layui.config({
         base: '/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'form', 'laydate'], function () {
+    }).use(['index', 'form', 'laydate', 'upload'], function () {
         var $ = layui.$
             , admin = layui.admin
             , element = layui.element
             , layer = layui.layer
             , laydate = layui.laydate
-            , form = layui.form;
+            , form = layui.form
+            , upload = layui.upload;
 
         form.render(null, 'component-form-group');
 
@@ -187,6 +216,33 @@
 
         /* 监听提交 */
         form.on('submit(sub)');
+
+        var id = $("#id").val();
+
+        //多图片上传
+        upload.render({
+            elem: '#test2'
+            , url: url + '/uploadRearingPhoto'
+            , multiple: true
+            , data: {id}
+            // , auto: false
+            // , bindAction: '#sub'
+            , choose: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                    console.log(result)
+                });
+            }
+            , done: function (res) {
+                //上传完毕
+                if (res.code > 0) {
+                    return layer.msg('上传成功');
+                } else {
+                    return layer.msg('上传失败');
+                }
+            }
+        });
     });
 </script>
 </body>

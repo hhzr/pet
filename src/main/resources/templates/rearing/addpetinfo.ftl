@@ -9,13 +9,6 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <link rel="stylesheet" href="style/admin.css" media="all">
-    <style>
-        .layui-upload-img {
-            width: 92px;
-            height: 110px;
-            margin: 0 10px 10px 0;
-        }
-    </style>
 </head>
 <body>
 <div id="LAY_app">
@@ -33,18 +26,6 @@
                     <div class="layui-card-body" style="padding: 15px;">
                         <form class="layui-form" action="/addRearingPet" content="json" method="post"
                               lay-filter="component-form-group">
-                            <div class="layui-upload">
-                                <label class="layui-form-label">宠物图片</label>
-
-                                <div class="layui-input-block">
-                                    <button type="button" class="layui-btn" id="test2">多图片上传</button>
-                                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                                        预览图：
-                                        <div class="layui-upload-list" id="demo2"></div>
-                                    </blockquote>
-                                </div>
-
-                            </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">名字</label>
                                 <div class="layui-input-inline">
@@ -169,14 +150,13 @@
         base: '/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'form', 'laydate', 'upload'], function () {
+    }).use(['index', 'form', 'laydate'], function () {
         var $ = layui.$
             , admin = layui.admin
             , element = layui.element
             , layer = layui.layer
             , laydate = layui.laydate
-            , form = layui.form
-            , upload = layui.upload;
+            , form = layui.form;
 
         form.render(null, 'component-form-group');
 
@@ -189,28 +169,6 @@
 
         var photo = "";
 
-        //多图片上传
-        upload.render({
-            elem: '#test2'
-            , url: url + '/uploadRearingPhoto'
-            , multiple: true
-            , before: function (obj) {
-                //预读本地文件示例，不支持ie8
-                obj.preview(function (index, file, result) {
-                    $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
-                    photo = result;
-                });
-            }
-            , data: {photo}
-            , done: function (res) {
-                //上传完毕
-                if (res.code > 0) {
-                    return layer.msg('图片上传失败');
-                } else {
-                    return layer.msg('图片上传成功');
-                }
-            }
-        });
     });
 </script>
 </body>

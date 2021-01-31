@@ -4,8 +4,10 @@ import com.manager.pet.mapper.rearing.RearingPetMapper;
 import com.manager.pet.model.dto.RearingPetDTO;
 import com.manager.pet.model.vo.RearingPetVO;
 import com.manager.pet.service.rearing.RearingPetService;
+
 import java.util.List;
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -84,5 +86,18 @@ public class RearingPetServiceImpl implements RearingPetService {
     @Override
     public Integer getRearingPetCount() {
         return rearingPetMapper.selectRearingPetCount();
+    }
+
+    @Override
+    public void uploadPetPhoto(String photo, String id) {
+        RearingPetVO rearingPetVO = rearingPetMapper.selectRearingPetById(Integer.valueOf(id));
+        String petPhoto = rearingPetVO.getPhoto();
+        StringBuffer p = new StringBuffer();
+        if (petPhoto != null && petPhoto != "") {
+            p.append(petPhoto).append(",").append(photo);
+            rearingPetMapper.uploadPetPhoto(p.toString(), id);
+        } else {
+            rearingPetMapper.uploadPetPhoto(photo, id);
+        }
     }
 }
