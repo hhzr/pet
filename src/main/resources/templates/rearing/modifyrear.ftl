@@ -40,7 +40,7 @@
                                     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
                                         预览图：
                                         <div class="layui-upload-list" id="demo2">
-                                            <#list rearingPet.photos as photo>
+                                            <#list rearingPet.photos! as photo>
                                                 <img src="data:image/jpeg;base64,${photo}" class="layui-upload-img">
                                             </#list>
                                         </div>

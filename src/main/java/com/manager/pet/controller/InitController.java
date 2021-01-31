@@ -5,6 +5,7 @@ import com.manager.pet.model.vo.RearingPetVO;
 import com.manager.pet.model.vo.Result;
 import com.manager.pet.service.fostercare.FosterCareService;
 import com.manager.pet.service.rearing.RearingPetService;
+
 import javax.annotation.Resource;
 
 import com.manager.pet.service.vip.VipService;
@@ -70,8 +71,10 @@ public class InitController {
     public String toModifyRearingPet(@RequestParam("id") Integer id, Model model) {
         RearingPetVO rearingPet = this.rearingPetService.getRearingPetById(id);
         String photo = rearingPet.getPhoto();
-        String[] split = photo.split(",");
-        rearingPet.setPhotos(new ArrayList<>(Arrays.asList(split)));
+        if (photo != null && photo != "") {
+            String[] split = photo.split(",");
+            rearingPet.setPhotos(new ArrayList<>(Arrays.asList(split)));
+        }
         model.addAttribute("rearingPet", rearingPet);
         return "rearing/modifyrear";
     }

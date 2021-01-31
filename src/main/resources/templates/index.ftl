@@ -89,7 +89,6 @@
     })
 
 
-    $("#vip").html("abc")
     $.ajax({
         url: url + "/indexInfo",
         type: 'get',
