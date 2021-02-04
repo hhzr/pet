@@ -98,7 +98,7 @@
 
                             <div class="layui-form-item">
                                 <div class="layui-inline">
-                                    <label class="layui-form-label">体重</label>
+                                    <label class="layui-form-label">体重(KG)</label>
                                     <div class="layui-input-inline">
                                         <input type="text" name="petWeight" lay-verify="required|number"
                                                value="${rearingPet.petWeight}" autocomplete="off" class="layui-input">
